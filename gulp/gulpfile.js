@@ -41,27 +41,29 @@ function copyFiles(){
 	.pipe(gulp.dest(config.path.dist.lib.dir));
 }
 
-function compile(watch, srcpath, filename, ext, dest, transform){
+function compile(watch, options){
 	var opts = {
 		cache: {},
 		packageCache: {},
+		standalone: config.app.appname,
 		debug: config.env.debug // produce source map by enabling debug = true
 	};
-	var bundler = browserify(srcpath + "/" + filename + ext, opts);
-	bundler.transform(transform);
+	var bundler = browserify(options.src + "/" + options.filename + options.ext, opts);
+	bundler.transform(options.transform);
 	function bundle(){
-		var stream = bundler.bundle()
+		var stream = bundler
+			.bundle()
 			.on("error", errorHandler)
-			.pipe(source(filename + ext))
+			.pipe(source(options.filename + options.ext))
 			.pipe(buffer())
 			.pipe(maps.init({loadMaps: true}))
 			.pipe(maps.write("."))
 		if(watch){
-			stream.pipe(gulp.dest(dest));
+			stream.pipe(gulp.dest(options.dest));
 			browserSync.reload();
 		}
 		else{
-			return stream.pipe(gulp.dest(dest));
+			return stream.pipe(gulp.dest(options.dest));
 		}
 	}
 	if(watch){
@@ -95,14 +97,28 @@ gulp.task("compileCss", function(){
 
 gulp.task("compileJs", function(){
 	var tasks = config.env.jsEntry.map(function(filename){
-		return compile(false, config.path.src.js.srcdir, filename, ".js", config.path.src.js.cmpdir, babelify);
+		var options = {
+			src: config.path.src.js.srcdir,
+			dest: config.path.src.js.cmpdir,
+			filename: filename,
+			ext: ".js",
+			transform: babelify
+		};
+		return compile(false, options);
 	});
 	return mergeStream(tasks);
 });
 
 gulp.task("watchJs", function(){
 	config.env.jsEntry.map(function(filename){
-		return compile(true, config.path.src.js.srcdir, filename, ".js", config.path.src.js.cmpdir, babelify);
+		var options = {
+			src: config.path.src.js.srcdir,
+			dest: config.path.src.js.cmpdir,
+			filename: filename,
+			ext: ".js",
+			transform: babelify
+		};
+		return compile(true, options);
 	});
 })
 
