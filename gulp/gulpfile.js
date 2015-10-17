@@ -27,34 +27,32 @@ function errorHandler(err){
 	this.emit("end");
 }
 
-function copyFiles(){
-	gulp.src(config.path.src.js.file.cmp)
-	.pipe(gulp.dest(config.path.dist.js.dir));
-
-	gulp.src(config.path.src.css.file.cmp)
-	.pipe(gulp.dest(config.path.dist.css.dir));
-
-	gulp.src(config.path.src.html.file.cmp)
-	.pipe(gulp.dest(config.path.dist.html.dir));
-
-	gulp.src(config.path.src.lib.file.all)
-	.pipe(gulp.dest(config.path.dist.lib.dir));
-}
-
+/**
+	@arg {boolean} watch - watch the files or not.
+	@arg {object} options - fomula:
+	{
+		{string}		src				: where the source files' path are.
+		{string}		dest			: where the transformed files will go.
+		{string}		filename	: name of the target file.
+		{string}		oriExt		: file's original extension.
+		{string}		newExt		: file's new extension.
+		{transform} transform	: babelify, sassify, cssifiy...
+	}
+*/
 function compile(watch, options){
 	var opts = {
 		cache: {},
 		packageCache: {},
 		standalone: config.app.appname,
-		debug: config.env.debug // produce source map by enabling debug = true
+		debug: true // produce source map by enabling debug = true
 	};
-	var bundler = browserify(options.src + "/" + options.filename + options.ext, opts);
+	var bundler = browserify(options.src + "/" + options.filename + options.oriExt, opts);
 	bundler.transform(options.transform);
 	function bundle(){
 		var stream = bundler
 			.bundle()
 			.on("error", errorHandler)
-			.pipe(source(options.filename + options.ext))
+			.pipe(source(options.filename + options.newExt))
 			.pipe(buffer())
 			.pipe(maps.init({loadMaps: true}))
 			.pipe(maps.write("."))
@@ -75,33 +73,29 @@ function compile(watch, options){
 }
 
 gulp.task("clean", function(){
-	return del([
-		config.path.src.js.cmpdir,
-		config.path.src.css.cmpdir,
-		config.path.src.html.cmpdir,
-		config.path.dist.dir
-	]);
+	return del([config.path.dist.self]);
 });
 
 gulp.task("compileCss", function(){
-	var tasks = config.env.cssEntry.map(function(filename){
-		return gulp.src(config.path.src.css.srcdir + "/" + filename + ".scss")
+	var tasks = config.app.cssEntries.map(function(filename){
+		return gulp.src(config.path.src.css.self + "/" + filename + ".scss")
 			.pipe(rename(filename + ".css"))
 			.pipe(maps.init())
 			.pipe(sass().on("error", errorHandler))
 			.pipe(maps.write("."))
-			.pipe(gulp.dest(config.path.src.css.cmpdir));
+			.pipe(gulp.dest(config.path.dist.css.self));
 	});
 	return mergeStream(tasks);
 });
 
 gulp.task("compileJs", function(){
-	var tasks = config.env.jsEntry.map(function(filename){
+	var tasks = config.app.jsEntries.map(function(filename){
 		var options = {
-			src: config.path.src.js.srcdir,
-			dest: config.path.src.js.cmpdir,
+			src: config.path.src.js.self,
+			dest: config.path.dist.js.self,
 			filename: filename,
-			ext: ".js",
+			oriExt: ".js",
+			newExt: ".js",
 			transform: babelify
 		};
 		return compile(false, options);
@@ -110,12 +104,13 @@ gulp.task("compileJs", function(){
 });
 
 gulp.task("watchJs", function(){
-	config.env.jsEntry.map(function(filename){
+	config.app.jsEntries.map(function(filename){
 		var options = {
-			src: config.path.src.js.srcdir,
-			dest: config.path.src.js.cmpdir,
+			src: config.path.src.js.self,
+			dest: config.path.dist.js.self,
 			filename: filename,
-			ext: ".js",
+			oriExt: ".js",
+			newExt: ".js",
 			transform: babelify
 		};
 		return compile(true, options);
@@ -123,21 +118,21 @@ gulp.task("watchJs", function(){
 })
 
 gulp.task("minifyCss", ["compileCss"], function(){
-	var tasks = config.env.cssEntry.map(function(filename){
-		return gulp.src(config.path.src.css.cmpdir + "/" + filename + ".css")
+	var tasks = config.app.cssEntries.map(function(filename){
+		return gulp.src(config.path.dist.css.self + "/" + filename + ".css")
 			.pipe(minifyCss())
 			.pipe(rename(filename + ".min.css"))
-			.pipe(gulp.dest(config.path.src.css.cmpdir));
+			.pipe(gulp.dest(config.path.dist.css.self));
 	});
 	return mergeStream(tasks);
 });
 
 gulp.task("minifyJs", ["compileJs"], function(){
-	var tasks = config.env.jsEntry.map(function(filename){
-		return gulp.src(config.path.src.js.cmpdir + "/" + filename + ".js")
+	var tasks = config.app.jsEntries.map(function(filename){
+		return gulp.src(config.path.dist.js.self + "/" + filename + ".js")
 			.pipe(uglify())
 			.pipe(rename(filename + ".min.js"))
-			.pipe(gulp.dest(config.path.src.js.cmpdir));
+			.pipe(gulp.dest(config.path.dist.js.self));
 	});
 	return mergeStream(tasks);
 });
@@ -152,26 +147,32 @@ gulp.task("minifyHtml", function(){
 		quotes: false,
 		loose: false
 	};
-
-	return gulp.src(config.path.src.html.file.src)
+	return gulp.src(config.path.src.html.files)
 		.pipe(minifyHtml(opts))
-		.pipe(gulp.dest(config.path.src.html.cmpdir));
+		.pipe(gulp.dest(config.path.dist.html.self));
+});
+
+gulp.task("copyMisc", function(){
+	return gulp.src(config.path.src.lib.files)
+		.pipe(gulp.dest(config.path.dist.lib.self));
 });
 
 gulp.task("watch", ["clean"], function(){
 	browserSync.init({
 		server: {
-			baseDir: config.env.server.basedir
+			baseDir: "./"
 		}
 	});
-	runSequence(["watchJs", "compileCss"]);
-	gulp.watch(config.path.src.css.file.src, ["compileCss"]).on("change", browserSync.reload);
-	gulp.watch(config.path.src.html.file.src).on("change", browserSync.reload);
-	gulp.watch(config.path.src.test.file.all, browserSync.reload);
+	runSequence(["watchJs", "compileCss", "minifyHtml", "copyMisc"]);
+	gulp.watch(config.path.src.css.files, ["compileCss"]).on("change", browserSync.reload);
+	gulp.watch(config.path.src.html.files, ["minifyHtml"]).on("change", browserSync.reload);
+	gulp.watch(config.path.test.files, browserSync.reload);
 });
 
 gulp.task("dev", ["clean"], function(cb){
-	runSequence(["minifyJs", "minifyCss", "minifyHtml"], cb);
+	runSequence(["compileJs", "compileCss", "minifyHtml", "copyMisc"], cb);
 });
 
-gulp.task("build", ["dev"], copyFiles);
+gulp.task("build", ["dev"], function(cb){
+	runSequence(["minifyJs", "minifyCss"], cb);
+});
