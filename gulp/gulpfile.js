@@ -77,11 +77,14 @@ gulp.task("clean", function(){
 });
 
 gulp.task("compileCss", function(){
+	var sassOpts = {
+		includePaths: require("node-bourbon").includePaths
+	};
 	var tasks = config.app.cssEntries.map(function(filename){
 		return gulp.src(config.path.src.css.self + "/" + filename + ".scss")
 			.pipe(rename(filename + ".css"))
 			.pipe(maps.init())
-			.pipe(sass().on("error", errorHandler))
+			.pipe(sass(sassOpts).on("error", errorHandler))
 			.pipe(maps.write("."))
 			.pipe(gulp.dest(config.path.dist.css.self));
 	});
@@ -166,7 +169,7 @@ gulp.task("watch", ["clean"], function(){
 	runSequence(["watchJs", "compileCss", "minifyHtml", "copyMisc"]);
 	gulp.watch(config.path.src.css.files, ["compileCss"]).on("change", browserSync.reload);
 	gulp.watch(config.path.src.html.files, ["minifyHtml"]).on("change", browserSync.reload);
-	gulp.watch(config.path.test.files, browserSync.reload);
+	gulp.watch(config.path.test.files).on("change", browserSync.reload);
 });
 
 gulp.task("dev", ["clean"], function(cb){
