@@ -156,8 +156,11 @@ gulp.task("minifyHtml", function(){
 });
 
 gulp.task("copyMisc", function(){
-	return gulp.src(config.path.src.lib.files)
+	gulp.src(config.path.src.lib.files)
 		.pipe(gulp.dest(config.path.dist.lib.self));
+
+	return gulp.src(config.path.src.media.files)
+		.pipe(gulp.dest(config.path.dist.media.self));
 });
 
 gulp.task("watch", ["clean"], function(){
