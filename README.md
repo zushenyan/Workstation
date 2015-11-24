@@ -51,4 +51,4 @@ set up your own entries in `env.js`.
 * support [esLint](http://eslint.org/).
 * No image minifying.
 * No image inlining for html.
-* Redundant js files in `dist/css` produced by Webpack when processing css are annoying.
+* Redundant js files in `dist/css` are annoying(which are produced by Webpack when processing css).
