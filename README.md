@@ -5,8 +5,7 @@ Frontend working environment.
 Use Gulp and Browserify for handling frontend working scenarios. Compatible with static site building or SPA.
 
 ### Usage
-
-* set up your own entries in `config.js`.
+set up your own entries in `config.js`.
 
 * `gulp build` - output production.
 * `gulp dev` - output development.
@@ -32,8 +31,7 @@ Use Gulp and Browserify for handling frontend working scenarios. Compatible with
 Use Webpack instead of Browserify to reduce the pain of writing lots of unnecessary codes.
 
 ### Usage
-
-* set up your own entries in `env.js`.
+set up your own entries in `env.js`.
 
 * `gulp build` - output production.
 * `gulp dev` - output development.
@@ -50,5 +48,7 @@ Use Webpack instead of Browserify to reduce the pain of writing lots of unnecess
 ### To-Be-Improved List
 
 * support [bourbon](http://bourbon.io/)
+* support [esLint](http://eslint.org/).
 * No image minifying.
 * No image inlining for html.
+* Redundant js files in `dist/css` produced by Webpack when processing css are annoying.
