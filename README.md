@@ -52,3 +52,12 @@ set up your own entries in `env.js`.
 * No image minifying.
 * No image inlining for html.
 * Redundant js files in `dist/css` are annoying(which are produced by Webpack when processing css).
+
+## React-Webpack
+It supports ES2015, React hot-module-reloading, node-bourbon, images(include svg) and fonts, plus auto inlining.
+
+### Usage
+Change whatever you want in `server.js` or `webpack.config.js`.
+
+* `npm run build` - output to `/assets` directory for production.
+* `npm start` - listen and watch on `http://localhost:8080` by default. It will automatically serve `index.html`. This command is same to `node server`.
