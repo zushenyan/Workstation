@@ -2,6 +2,7 @@ import React from "react";
 import MyStore from "../../stores/MyStore";
 import dogeImage from "../../../images/doge.jpg";
 import ferryImage from "../../../images/ferry.jpg";
+import svgImage from "../../../images/svg.svg";
 
 export default class HelloBox extends React.Component {
 	constructor(props){
@@ -30,6 +31,7 @@ export default class HelloBox extends React.Component {
 				<h1 className="box">Just a plain title there</h1>
 				<img className="doge" src={dogeImage} />
 				<img src={ferryImage} />
+				<img src={svgImage} />
 				{titleEle}
 				{contentEle}
 			</div>

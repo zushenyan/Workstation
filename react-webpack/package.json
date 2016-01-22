@@ -1,13 +1,14 @@
 {
-  "name": "webpack_test",
+  "name": "react-webpack",
   "version": "1.0.0",
-  "description": "",
+  "description": "react-webpack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack -p",
+    "start": "node server"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "andrew yan",
+  "license": "MIT",
   "devDependencies": {
     "alt": "^0.18.1",
     "babel-core": "^6.4.0",
@@ -20,10 +21,12 @@
     "babel-runtime": "^6.3.19",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
+    "history": "^1.17.0",
     "node-bourbon": "^4.2.3",
     "node-sass": "^3.4.2",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "react-router": "^1.0.3",
     "react-transform-hmr": "^1.0.1",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
