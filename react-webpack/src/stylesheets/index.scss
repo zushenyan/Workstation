@@ -1,0 +1,31 @@
+@import "bourbon";
+
+.box {
+	background-color: yellow;
+}
+
+.doge {
+	@include transition(all 0.5s ease-in-out);
+
+	&:hover {
+		@include transform(rotate(10deg));
+	}
+}
+
+h1 {
+	font-family: jennifer-lynne;
+}
+
+@include keyframes(spin) {
+	from {
+		@include transform(rotate(0deg));
+	}
+	to {
+		@include transform(rotate(45deg));
+	}
+}
+
+@font-face {
+	font-family: "jennifer-lynne";
+	src: url("./fonts/JenniferLynne.ttf");
+}
