@@ -43,6 +43,12 @@
         ],
         "no-unused-vars": [
           "error"
-        ]
+        ],
+        "no-console": [
+          "error",
+          { "allow": ["log", "warn", "error"] }
+        ],
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error"
     }
 }
