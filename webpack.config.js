@@ -1,36 +1,20 @@
-const path    = require("path");
-
-const babel = {
-   test: /\.js(x)?$/,
-   exclude: /node_modules/,
-   loader: "babel-loader"
-};
-
-const url = {
-   test: /\.(jpg|png|gif|svg)$/,
-   loader: "url-loader",
-   query: { limit: 10000 }
-};
-
-const sass = {
-  test: /\.(scss|sass)$/,
-	loader: "style!css!sass"
-};
-
-const font = {
-  test: /\.(woffs|woff2|ttf|eot)$/,
-	loader: "file-loader"
-};
+const path = require("path");
+const {
+  babel,
+  url,
+  sass,
+  font
+} = require("./webpack.loaders.js");
 
 module.exports = {
-  devtool: "eval",
+  devtool: "#inline-source-map",
   entry: {
-    app: ["./src/index.js"]
+    app: ["babel-polyfill", "./src/index.js"]
   },
   output: {
-    path:       path.resolve(__dirname, "./assets"),
+    path: path.resolve(__dirname, "./assets"),
     publicPath: "/temp/",
-    filename:   "bundle.js"
+    filename: "bundle.js"
   },
   plugins: [],
   module: {
