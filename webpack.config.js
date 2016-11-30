@@ -4,6 +4,7 @@ const {
   babel,
   url,
   font,
+  json,
   style,
   css,
   postcss,
@@ -22,7 +23,7 @@ module.exports = {
   },
   plugins: [],
   module: {
-    loaders: [babel, url, style, css, postcss, sass, font]
+    loaders: [babel, json, url, font, style, css, postcss, sass]
   },
   postcss: [
     autoprefixer()

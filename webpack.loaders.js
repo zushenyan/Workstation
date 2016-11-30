@@ -17,6 +17,11 @@ const font = {
   loader: "file-loader"
 };
 
+const json = {
+  test: /\.json$/,
+  loader: "json-loader"
+};
+
 const style = {
   test: /\.(scss|sass)$/,
   loader: "style-loader"
@@ -41,6 +46,7 @@ module.exports = {
   babel,
   url,
   font,
+  json,
   style,
   css,
   postcss,
