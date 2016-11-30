@@ -12,19 +12,37 @@ const url = {
   }
 };
 
-const sass = {
-  test: /\.(scss|sass)$/,
-  loader: "style!css!sass"
-};
-
 const font = {
   test: /\.(woffs|woff2|ttf|eot)$/,
   loader: "file-loader"
 };
 
+const style = {
+  test: /\.(scss|sass)$/,
+  loader: "style-loader"
+};
+
+const css = {
+  test: /\.(scss|sass)$/,
+  loader: "css-loader"
+};
+
+const postcss = {
+  test: /\.(scss|sass)$/,
+  loader: "postcss-loader"
+};
+
+const sass = {
+  test: /\.(scss|sass)$/,
+  loader: "sass-loader"
+};
+
 module.exports = {
   babel,
   url,
-  sass,
-  font
+  font,
+  style,
+  css,
+  postcss,
+  sass
 };

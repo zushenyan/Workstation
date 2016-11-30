@@ -1,9 +1,13 @@
-const path = require("path");
+const autoprefixer = require("autoprefixer");
+const path         = require("path");
 const {
   babel,
   url,
-  sass,
-  font
+  font,
+  style,
+  css,
+  postcss,
+  sass
 } = require("./webpack.loaders.js");
 
 module.exports = {
@@ -12,12 +16,15 @@ module.exports = {
     app: ["babel-polyfill", "./src/index.js"]
   },
   output: {
-    path: path.resolve(__dirname, "./assets"),
+    path:       path.resolve(__dirname, "./assets"),
     publicPath: "/temp/",
-    filename: "bundle.js"
+    filename:   "bundle.js"
   },
   plugins: [],
   module: {
-    loaders: [babel, url, sass, font]
-  }
+    loaders: [babel, url, style, css, postcss, sass, font]
+  },
+  postcss: [
+    autoprefixer()
+  ]
 };

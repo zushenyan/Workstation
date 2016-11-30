@@ -44,7 +44,10 @@
       "always"
     ],
     "no-unused-vars": [
-      "error"
+      "error",
+      {
+        "args": "none"
+      }
     ],
     "no-console": [
       "error", {
