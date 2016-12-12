@@ -25,6 +25,13 @@ module.exports = {
   module: {
     loaders: [babel, json, url, font, style, css, postcss, sass]
   },
+  resolve: {
+    root: path.resolve(__dirname),
+    alias: {
+      src: "src"
+    },
+    extensions: ["", ".js", ".jsx"]
+  },
   postcss: [
     autoprefixer()
   ]
