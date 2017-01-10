@@ -1,7 +1,9 @@
+@import "src/variables";
+
 .hello-world {
-  color: blue;
+  color: $blue;
   display: flex;
   &.toggle {
-    color: green;
+    color: $green;
   }
 }
