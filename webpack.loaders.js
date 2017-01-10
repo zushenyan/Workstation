@@ -29,7 +29,10 @@ const style = {
 
 const css = {
   test: /\.(scss|sass)$/,
-  loader: "css-loader"
+  loader: "css-loader",
+  query: {
+    modules: true
+  }
 };
 
 const postcss = {

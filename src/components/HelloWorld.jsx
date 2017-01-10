@@ -1,5 +1,6 @@
 // @flow
 import React from "react";
+import style from "./HelloWorld.scss";
 import cx from "classnames";
 
 type Props = {
@@ -9,8 +10,8 @@ type Props = {
 
 export const HelloWorld = ({toggle = false, text = ""}: Props) => {
   const className = cx({
-    "hello-world": true,
-    "toggle":      toggle
+    [style["hello-world"]]: true,
+    [style["toggle"]]:      toggle
   });
   return <h1 className = {className} >{text}</h1>;
 };
