@@ -27,15 +27,19 @@ module.exports = Object.assign(config, {
     loaders: [js, json, image, font, extractCss]
   },
   plugins: [
+    // misc optimization
     new HtmlWebpackPlugin({
       template: "template.ejs"
     }),
     new ExtractTextPlugin("[name]-[hash:6].css"),
+
+    // general optmization
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify("production")
       }
     }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
@@ -44,6 +48,9 @@ module.exports = Object.assign(config, {
         warnings: false
       }
     }),
-    new webpack.optimize.DedupePlugin()
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "commons"
+    })
   ]
 });
