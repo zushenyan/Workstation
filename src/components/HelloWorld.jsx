@@ -1,7 +1,8 @@
 // @flow
 import React from "react";
 import cx from "classnames";
-import foobar from "mock-data/foobar";
+import foobar from "mock-data/foobar.json";
+
 import photoBigJpg from "images/photo-big.jpg";
 import photoSmallPng from "images/photo-small.png";
 import ringGif from "images/ring.gif";

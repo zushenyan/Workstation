@@ -3,7 +3,7 @@ const WebpackDevServer = require("webpack-dev-server");
 const config           = require("./webpack.development.js");
 
 config.entry.app.unshift("webpack-dev-server/client?http://localhost:8080/", "webpack/hot/dev-server");
-config.plugins.push( new webpack.HotModuleReplacementPlugin() );
+config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 const compiler = webpack(config);
 const server   = new WebpackDevServer(compiler, {
@@ -11,7 +11,8 @@ const server   = new WebpackDevServer(compiler, {
   publicPath: config.output.publicPath,
   stats:      {
     colors:   true,
-    progress: true
+    progress: true,
+    chunks:   false
   }
 });
 
