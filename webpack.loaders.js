@@ -1,11 +1,11 @@
-const babel = {
-  test: /\.js(x)?$/,
+const js = {
+  test: /\.(js|jsx)?$/,
   exclude: /node_modules/,
   loader: "babel-loader"
 };
 
-const url = {
-  test: /\.(jpg|png|gif|svg)$/,
+const image = {
+  test: /\.(jpeg|jpg|png|gif|svg)$/,
   loader: "url-loader",
   query: {
     limit: 10000
@@ -13,7 +13,7 @@ const url = {
 };
 
 const font = {
-  test: /\.(woffs|woff2|ttf|eot)$/,
+  test: /\.(woff|woff2|ttf|eot)$/,
   loader: "file-loader"
 };
 
@@ -22,36 +22,20 @@ const json = {
   loader: "json-loader"
 };
 
-const style = {
-  test: /\.(scss|sass)$/,
-  loader: "style-loader"
-};
-
 const css = {
   test: /\.(scss|sass)$/,
-  loader: "css-loader",
-  query: {
-    modules: true
-  }
-};
-
-const postcss = {
-  test: /\.(scss|sass)$/,
-  loader: "postcss-loader"
-};
-
-const sass = {
-  test: /\.(scss|sass)$/,
-  loader: "sass-loader"
+  loaders: [
+    "style-loader",
+    "css-loader?modules",
+    "postcss-loader",
+    "sass-loader"
+  ]
 };
 
 module.exports = {
-  babel,
-  url,
+  js,
+  image,
   font,
   json,
-  style,
-  css,
-  postcss,
-  sass
+  css
 };

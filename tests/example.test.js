@@ -1,4 +1,4 @@
-import {add} from "../src/add.js";
+import {add} from "../src/utils/add";
 
 describe("test", () => {
   it("should work", () => {

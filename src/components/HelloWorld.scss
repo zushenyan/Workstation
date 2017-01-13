@@ -1,8 +1,10 @@
-@import "src/variables";
+@import "stylesheets/variables";
+@import "stylesheets/fonts";
 
-.hello-world {
-  color: $blue;
-  display: flex;
+.title {
+  font-family: "BungeeShade";
+  color:       $blue;
+  display:     flex;
   &.toggle {
     color: $green;
   }
