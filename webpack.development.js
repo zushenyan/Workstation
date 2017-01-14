@@ -1,27 +1,37 @@
-const webpack = require("webpack");
-const config  = require("./webpack.common.js");
+const webpack      = require("webpack");
+const serverConfig = require("./config/server-config");
+const config       = require("./webpack.common.js");
 const {
   js,
   image,
-  font,
+  file,
   json,
   css
 } = require("./webpack.loaders.js");
 
 config.entry.app.unshift(
-  "webpack-dev-server/client?http://localhost:8080/",
+  `webpack-dev-server/client?${serverConfig.devServerAddress}`,
   "webpack/hot/dev-server"
 );
+
+image.query = Object.assign(image.query, {
+  name: "[name].[ext]"
+});
+
+file.query = Object.assign(file.query, {
+  name: "[name].[ext]"
+});
 
 module.exports = Object.assign(config, {
   devtool: "#inline-source-map",
   output: Object.assign(config.output, {
-    // publicPath: "/dev-hot/",
-    publicPath: "/",
+    // for resolving css/sass-loader with source map breaks url-loader
+    // https://github.com/webpack/css-loader/issues/232
+    publicPath: `${serverConfig.devServerAddress}/`,
     filename:   "[name].js"
   }),
   module: {
-    loaders: [js, json, image, font, css]
+    loaders: [js, json, image, file, css]
   },
   plugins: config.plugins.concat([
     new webpack.DefinePlugin({

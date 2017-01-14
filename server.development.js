@@ -1,16 +1,33 @@
 const webpack          = require("webpack");
 const WebpackDevServer = require("webpack-dev-server");
+const open             = require("open");
 const config           = require("./webpack.development.js");
+const serverConfig     = require("./config/server-config");
 
 const compiler = webpack(config);
 const server   = new WebpackDevServer(compiler, {
-  hot:        true,
-  publicPath: config.output.publicPath,
-  stats:      {
+  hot:                true,
+  publicPath:         config.output.publicPath,
+  historyApiFallback: true,
+
+  stats: {
     colors:   true,
     progress: true,
     chunks:   false
   }
 });
 
-server.listen(8080);
+server.listen(
+  serverConfig.devServerPort,
+  [
+    "localhost",
+    serverConfig.devServerIP
+  ],
+  () => {
+    console.log("Development server now is listening on:");
+    console.log(`http://localhost:${serverConfig.devServerPort}`);
+    console.log(`http://127.0.0.1:${serverConfig.devServerPort}`);
+    console.log(serverConfig.devServerAddress);
+    open(serverConfig.devServerAddress);
+  }
+);

@@ -1,10 +1,11 @@
 const webpack           = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const config            = require("./webpack.common.js");
+const packageJson       = require("./package.json");
 const {
   js,
   image,
-  font,
+  file,
   json,
   extractCss
 } = require("./webpack.loaders.js");
@@ -13,21 +14,24 @@ image.query = Object.assign(image.query, {
   name: "[name]-[hash:6].[ext]"
 });
 
-font.query = Object.assign(font.query, {
+file.query = Object.assign(file.query, {
   name: "[name]-[hash:6].[ext]"
 });
 
 module.exports = Object.assign(config, {
+  entry: Object.assign(config.entry, {
+    vendor: Object.keys(packageJson.dependencies)
+  }),
   output: Object.assign(config.output, {
     publicPath: "./",
-    filename:   "[name]-[hash:6].js"
+    filename:   "[name]-[chunkhash:6].js"
   }),
   module: {
-    loaders: [js, json, image, font, extractCss]
+    loaders: [js, json, image, file, extractCss]
   },
   plugins: config.plugins.concat([
     // misc optimization
-    new ExtractTextPlugin("[name]-[hash:6].css"),
+    new ExtractTextPlugin("[name]-[chunkhash:6].css"),
 
     // general optmization
     new webpack.DefinePlugin({
@@ -40,12 +44,13 @@ module.exports = Object.assign(config, {
         comments: false
       },
       compress: {
-        warnings: false
+        warnings:     false,
+        drop_console: true
       }
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "common"
+      names: ["vendor", "manifest"]
     })
   ])
 });

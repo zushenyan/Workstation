@@ -1,0 +1,12 @@
+@mixin image($filename) {
+  background-image: url("images/#{$filename}");
+  background-size:  auto;
+  width:            100px;
+  height:           100px;
+}
+
+.photo-big { @include image("photo-big.jpg") }
+.photo-small { @include image("photo-small.png") }
+.ring-gif { @include image("ring.gif") }
+.ring-svg { @include image("ring.svg") }
+.thumbs-up-png { @include image("thumbs-up.png") }

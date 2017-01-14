@@ -15,7 +15,7 @@ const image = {
   }
 };
 
-const font = {
+const file = {
   test:   /\.(woff|woff2|ttf|eot)$/,
   loader: "file-loader",
   query:  {}
@@ -28,20 +28,20 @@ const json = {
 };
 
 /*
-  development only
+  for development
 */
 const css = {
   test:    /\.(scss|sass)$/,
   loaders: [
     "style-loader",
-    "css-loader?modules&localIdentName=[name]-[local]",
+    "css-loader?modules&localIdentName=[name]-[local]-[hash:6]&sourceMap",
     "postcss-loader",
-    "sass-loader"
+    "sass-loader?sourceMap"
   ]
 };
 
 /*
-  production only
+  for production
 */
 const extractCss = {
   test:    /\.(scss|sass)$/,
@@ -51,7 +51,7 @@ const extractCss = {
 module.exports = {
   js,
   image,
-  font,
+  file,
   json,
   css,
   extractCss

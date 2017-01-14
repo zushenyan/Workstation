@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id":   1,
+      "name": "foo",
+      "email": "foo@test.com"
+    },
+    {
+      "id":     2,
+      "name":  "bar",
+      "email": "haha@test.com"
+    }
+  ],
+  "comments": [
+    {
+      "id":     1,
+      "body":   "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

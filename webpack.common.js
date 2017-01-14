@@ -16,6 +16,7 @@ module.exports = {
       "src":         "src",
       "components":  "src/components",
       "constants":   "src/constants",
+      "routing":     "src/routing",
       "utils":       "src/utils",
       "stylesheets": "src/stylesheets",
       "assets":      "src/assets",
@@ -23,6 +24,7 @@ module.exports = {
       "fonts":       "src/assets/fonts",
 
       "tests":       "tests",
+      "config":      "config",
       "mock-data":   "mock-data",
     },
     extensions: ["", ".js", ".jsx", ".json"]

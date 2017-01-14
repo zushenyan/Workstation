@@ -19,16 +19,16 @@
     "eslint": "^3.9.1",
     "eslint-plugin-flowtype": "^2.25.0",
     "eslint-plugin-react": "^6.6.0",
-    "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.26.0",
+    "ip": "^1.1.4",
     "jest": "^17.0.3",
     "json-loader": "^0.5.4",
+    "json-server": "^0.9.4",
     "node-sass": "^4.3.0",
+    "open": "^0.0.5",
     "postcss-loader": "^1.1.1",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -38,9 +38,14 @@
   "scripts": {
     "start": "node server.development.js",
     "build": "rm -rf ./dist && webpack -p --config webpack.production.js",
-    "test": "jest --watch --no-cache"
+    "test": "jest --watch --no-cache",
+    "api": "node server.api.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.1"
+  },
   "jest": {
     "testPathDirs": [
       "tests"
