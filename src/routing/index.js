@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  browserHistory,
+  hashHistory,
   Router,
   Route,
   IndexRoute
@@ -14,7 +14,7 @@ import ApiPage from "components/ApiPage";
 import * as PATHS from "constants/paths";
 
 export default (
-  <Router history = {browserHistory}>
+  <Router history = {hashHistory}>
     <Route path = {PATHS.ROOT} component = {MainPage}>
       <IndexRoute component = {HelloWorldPage} />
       <Route path = {PATHS.HELLO_WORLD_PAGE} component = {HelloWorldPage} />
