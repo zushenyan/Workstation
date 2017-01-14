@@ -27,6 +27,9 @@ const json = {
   query:  {}
 };
 
+/*
+  development only
+*/
 const css = {
   test:    /\.(scss|sass)$/,
   loaders: [
@@ -37,6 +40,9 @@ const css = {
   ]
 };
 
+/*
+  production only
+*/
 const extractCss = {
   test:    /\.(scss|sass)$/,
   loader: ExtractTextPlugin.extract("style", "css?modules&localIdentName=[name]-[local]-[hash:6]!postcss!sass")

@@ -1,5 +1,4 @@
 const webpack           = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const config            = require("./webpack.common.js");
 const {
@@ -26,11 +25,8 @@ module.exports = Object.assign(config, {
   module: {
     loaders: [js, json, image, font, extractCss]
   },
-  plugins: [
+  plugins: config.plugins.concat([
     // misc optimization
-    new HtmlWebpackPlugin({
-      template: "./src/template.ejs"
-    }),
     new ExtractTextPlugin("[name]-[hash:6].css"),
 
     // general optmization
@@ -39,7 +35,6 @@ module.exports = Object.assign(config, {
         "NODE_ENV": JSON.stringify("production")
       }
     }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       output: {
         comments: false
@@ -52,5 +47,5 @@ module.exports = Object.assign(config, {
     new webpack.optimize.CommonsChunkPlugin({
       name: "common"
     })
-  ]
+  ])
 });

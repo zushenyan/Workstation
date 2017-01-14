@@ -1,5 +1,7 @@
-const autoprefixer = require("autoprefixer");
-const path         = require("path");
+const webpack           = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const autoprefixer      = require("autoprefixer");
+const path              = require("path");
 
 module.exports = {
   entry: {
@@ -25,6 +27,14 @@ module.exports = {
     },
     extensions: ["", ".js", ".jsx", ".json"]
   },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./src/index.ejs"
+    }),
+  ],
+
+  // loaders' settings
   postcss: [
     autoprefixer()
   ]
