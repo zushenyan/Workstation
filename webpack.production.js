@@ -29,7 +29,7 @@ module.exports = Object.assign(config, {
   plugins: [
     // misc optimization
     new HtmlWebpackPlugin({
-      template: "template.ejs"
+      template: "./src/template.ejs"
     }),
     new ExtractTextPlugin("[name]-[hash:6].css"),
 
@@ -50,7 +50,7 @@ module.exports = Object.assign(config, {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      name: "commons"
+      name: "common"
     })
   ]
 });

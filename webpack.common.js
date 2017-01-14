@@ -11,15 +11,16 @@ module.exports = {
   resolve: {
     root:  path.resolve(__dirname),
     alias: {
-      "src":        "src",
-      "components": "src/components",
-      "constants":  "src/constants",
-      "utils":      "src/utils",
+      "src":         "src",
+      "components":  "src/components",
+      "constants":   "src/constants",
+      "utils":       "src/utils",
+      "stylesheets": "src/stylesheets",
+      "assets":      "src/assets",
+      "images":      "src/assets/images",
+      "fonts":       "src/assets/fonts",
 
       "tests":       "tests",
-      "images":      "images",
-      "fonts":       "fonts",
-      "stylesheets": "stylesheets",
       "mock-data":   "mock-data",
     },
     extensions: ["", ".js", ".jsx", ".json"]
