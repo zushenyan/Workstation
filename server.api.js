@@ -12,10 +12,6 @@ server.use(router);
 
 server.listen(
   serverConfig.apiServerPort,
-  [
-    "localhost",
-    serverConfig.apiServerIP
-  ],
   () => {
     console.log("API server now is listening on:");
     console.log(`http://localhost:${serverConfig.apiServerPort}`);
