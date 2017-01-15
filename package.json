@@ -29,6 +29,8 @@
     "node-sass": "^4.3.0",
     "open": "^0.0.5",
     "postcss-loader": "^1.1.1",
+    "redux-devtools-extension": "^1.0.0",
+    "redux-logger": "^2.7.4",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -43,10 +45,16 @@
     "api": "node server.api.js"
   },
   "dependencies": {
+    "immutable": "^3.8.1",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "react-router": "2.8.0"
+    "react-redux": "^5.0.2",
+    "react-router": "2.8.0",
+    "react-router-redux": "^4.0.7",
+    "redux": "^3.6.0",
+    "redux-immutable": "^3.0.10",
+    "redux-saga": "^0.14.2"
   },
   "jest": {
     "testPathDirs": [

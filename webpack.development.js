@@ -12,7 +12,7 @@ const {
 } = require("./webpack.loaders.js");
 
 module.exports = {
-  devtool: "#inline-source-map",
+  devtool: "inline-source-map",
   entry: {
     app: ["babel-polyfill", "./src/index.js"]
   },
@@ -28,11 +28,18 @@ module.exports = {
     root:  path.resolve(__dirname),
     alias: {
       "src":         "src",
+      "api":         "src/api",
       "components":  "src/components",
       "constants":   "src/constants",
       "routing":     "src/routing",
       "utils":       "src/utils",
       "stylesheets": "src/stylesheets",
+      "actions":     "src/actions",
+      "reducers":    "src/reducers",
+      "containers":  "src/containers",
+      "store":       "src/store",
+      "sagas":       "src/sagas",
+
       "assets":      "src/assets",
       "images":      "src/assets/images",
       "fonts":       "src/assets/fonts",

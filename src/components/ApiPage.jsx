@@ -1,23 +1,43 @@
-import React, { Component } from "react";
+import React, { PropTypes, PureComponent } from "react";
 
-export default class ApiPage extends Component {
-  constructor(){
-    super();
-    this.onFetchButtonClick = this.onFetchButtonClick.bind(this);
-  }
-
+export default class ApiPage extends PureComponent {
   render(){
+    const {
+      data,
+      error,
+      requestState,
+      onFetch
+    } = this.props;
     return (
       <div>
-        <button onClick = {this.onFetchButtonClick}>fetch api(see console for result)</button>
+        <button onClick = {onFetch}>fetch data</button>
+        <div>
+          <h3>requestState</h3>
+          {requestState}
+        </div>
+        <div>
+          <h3>data</h3>
+          {data && data[0].email}
+        </div>
+        <div>
+          <h3>error</h3>
+          {error}
+        </div>
       </div>
     );
   }
-
-  onFetchButtonClick(){
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", data => console.log(data));
-    xhr.open("GET", "http://localhost:8081/users");
-    xhr.send();
-  }
 }
+
+ApiPage.propTypes = {
+  data:         PropTypes.any,
+  error:        PropTypes.any,
+  requestState: PropTypes.string,
+  onFetch:      PropTypes.func
+};
+
+ApiPage.defaultProps = {
+  data:         null,
+  error:        null,
+  requestState: "",
+  onFetch:      () => console.log("onFetch")
+};
