@@ -1,45 +1,63 @@
-const webpack      = require("webpack");
-const serverConfig = require("./config/server-config");
-const config       = require("./webpack.common.js");
+const webpack           = require("webpack");
+const path              = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const autoprefixer      = require("autoprefixer");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const {
   js,
   image,
   file,
   json,
-  css
+  extractCss
 } = require("./webpack.loaders.js");
 
-config.entry.app.unshift(
-  `webpack-dev-server/client?${serverConfig.devServerAddress}`,
-  "webpack/hot/dev-server"
-);
-
-image.query = Object.assign(image.query, {
-  name: "[name].[ext]"
-});
-
-file.query = Object.assign(file.query, {
-  name: "[name].[ext]"
-});
-
-module.exports = Object.assign(config, {
+module.exports = {
   devtool: "#inline-source-map",
-  output: Object.assign(config.output, {
-    // for resolving css/sass-loader with source map breaks url-loader
-    // https://github.com/webpack/css-loader/issues/232
-    publicPath: `${serverConfig.devServerAddress}/`,
-    filename:   "[name].js"
-  }),
-  module: {
-    loaders: [js, json, image, file, css]
+  entry: {
+    app: ["babel-polyfill", "./src/index.js"]
   },
-  plugins: config.plugins.concat([
+  output: {
+    path:       path.resolve(__dirname, "./dist"),
+    publicPath: "./",
+    filename:   "[name].js"
+  },
+  module: {
+    loaders: [js, json, image, file, extractCss]
+  },
+  resolve: {
+    root:  path.resolve(__dirname),
+    alias: {
+      "src":         "src",
+      "components":  "src/components",
+      "constants":   "src/constants",
+      "routing":     "src/routing",
+      "utils":       "src/utils",
+      "stylesheets": "src/stylesheets",
+      "assets":      "src/assets",
+      "images":      "src/assets/images",
+      "fonts":       "src/assets/fonts",
+
+      "tests":       "tests",
+      "config":      "config",
+      "mock-data":   "mock-data",
+    },
+    extensions: ["", ".js", ".jsx", ".json"]
+  },
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify("development")
       }
     }),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ])
-});
+    new ExtractTextPlugin("[name].css"),
+    new HtmlWebpackPlugin({
+      template: "./src/index.ejs"
+    })
+  ],
+
+  // loaders' settings
+  postcss: [
+    autoprefixer()
+  ]
+};

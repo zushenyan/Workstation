@@ -11,14 +11,17 @@ const image = {
   test:   /\.(jpeg|jpg|png|gif|svg)$/,
   loader: "url-loader",
   query:  {
-    limit: 10000
+    limit: 10000,
+    name: "[name].[ext]"
   }
 };
 
 const file = {
   test:   /\.(woff|woff2|ttf|eot)$/,
   loader: "file-loader",
-  query:  {}
+  query:  {
+    name: "[name].[ext]"
+  }
 };
 
 const json = {
@@ -27,9 +30,6 @@ const json = {
   query:  {}
 };
 
-/*
-  for development
-*/
 const css = {
   test:    /\.(scss|sass)$/,
   loaders: [
@@ -40,9 +40,6 @@ const css = {
   ]
 };
 
-/*
-  for production
-*/
 const extractCss = {
   test:    /\.(scss|sass)$/,
   loader: ExtractTextPlugin.extract("style", "css?modules&localIdentName=[name]-[local]-[hash:6]!postcss!sass")

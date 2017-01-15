@@ -37,6 +37,7 @@
   },
   "scripts": {
     "start": "node server.development.js",
+    "watch": "rm -rf ./dist && webpack --watch --config webpack.development.js",
     "build": "rm -rf ./dist && webpack -p --config webpack.production.js",
     "test": "jest --watch --no-cache",
     "api": "node server.api.js"

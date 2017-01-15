@@ -1,6 +1,7 @@
 const webpack           = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const config            = require("./webpack.common.js");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const config            = require("./webpack.development.js");
 const {
   js,
   image,
@@ -18,22 +19,23 @@ file.query = Object.assign(file.query, {
 });
 
 module.exports = Object.assign(config, {
+  devtool: "",
   output: Object.assign(config.output, {
-    publicPath: "./",
     filename:   "[name]-[chunkhash:6].js"
   }),
-  module: {
+  module: Object.assign(config.module, {
     loaders: [js, json, image, file, extractCss]
-  },
-  plugins: config.plugins.concat([
-    // misc optimization
+  }),
+  plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin("[name]-[chunkhash:6].css"),
-
-    // general optmization
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify("production")
       }
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/index.ejs"
     }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
@@ -52,5 +54,5 @@ module.exports = Object.assign(config, {
       names: ["manifest", "vendor"],
       minChunks: ({resource}) => /node_modules/.test(resource)
     })
-  ])
+  ]
 });
