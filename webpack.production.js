@@ -46,6 +46,9 @@ module.exports = Object.assign(config, {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.CommonsChunkPlugin({
+      // the first one is manifest js file for webpack runtime code.
+      // the second one is the actual common vendor code for sharing among all entries.
+      // https://jeremygayed.com/dynamic-vendor-bundling-in-webpack-528993e48aab#.f1u14l20q
       names: ["manifest", "vendor"],
       minChunks: ({resource}) => /node_modules/.test(resource)
     })
