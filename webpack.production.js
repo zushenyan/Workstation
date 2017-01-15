@@ -1,7 +1,6 @@
 const webpack           = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const config            = require("./webpack.common.js");
-const packageJson       = require("./package.json");
 const {
   js,
   image,
@@ -19,9 +18,6 @@ file.query = Object.assign(file.query, {
 });
 
 module.exports = Object.assign(config, {
-  entry: Object.assign(config.entry, {
-    vendor: Object.keys(packageJson.dependencies)
-  }),
   output: Object.assign(config.output, {
     publicPath: "./",
     filename:   "[name]-[chunkhash:6].js"
@@ -50,7 +46,8 @@ module.exports = Object.assign(config, {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.CommonsChunkPlugin({
-      names: ["vendor", "manifest"]
+      names: ["manifest", "vendor"],
+      minChunks: ({resource}) => /node_modules/.test(resource)
     })
   ])
 });
