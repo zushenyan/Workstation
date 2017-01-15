@@ -15,9 +15,7 @@ Features
 # Feature Variation
 For basic React support, check `basic` branch.
 
-For basic React & Redux support, check `redux` branch.
-
-For React & Redux Saga support, check `redux-saga` branch.
+For basic React & Redux Saga support, check `redux` branch.
 
 # Scripts
 - `yarn start`- start development server. Default on `your_ip_address:8080`.
@@ -40,6 +38,5 @@ There is an [issue](https://github.com/reactjs/react-router-redux/issues/197) wh
 - `master` - the main branch.
 - `basic` - branch out from master, almost sync with `master`.
 - `redux` - branch out from `basic`.
-- `redux-saga` - branch out from `redux`.
 
 Other branches are legacy/experiments, please ignore them.
