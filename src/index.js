@@ -1,4 +1,4 @@
-import "!style!css!stylesheets/normalize.css";
+import "!style-loader!css-loader!stylesheets/normalize.css";
 
 import React from "react";
 import ReactDOM from "react-dom";
