@@ -10,7 +10,7 @@ Features
 - mock API server
 - development server
 - custom template `index.html`
-- best practice bundle optimization (all `dependencies` in `package.json` will be output as `vendor`)
+- bundle optimization
 
 # Feature Variation
 For basic React support, check `basic` branch.
@@ -32,6 +32,8 @@ There is an [issue](https://github.com/reactjs/react-router-redux/issues/197) wh
 # For Developer
 #### Todos
 - Support Webpack 2
+- Support Progressive Web Application.
+- Support audio assets
 
 #### Branches
 - `master` - the main branch.
