@@ -4,13 +4,13 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const config            = require("./webpack.development.js");
 const {
   js,
-  image,
+  url,
   file,
   json,
   extractCss
 } = require("./webpack.loaders.js");
 
-image.query = Object.assign(image.query, {
+url.query = Object.assign(url.query, {
   name: "[name]-[hash:6].[ext]"
 });
 
@@ -24,7 +24,7 @@ module.exports = Object.assign(config, {
     filename:   "[name]-[chunkhash:6].js"
   }),
   module: Object.assign(config.module, {
-    loaders: [js, json, image, file, extractCss]
+    loaders: [js, json, url, file, extractCss]
   }),
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),

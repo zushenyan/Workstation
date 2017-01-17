@@ -12,7 +12,7 @@ import {
 
 import MainPage from "containers/MainPage";
 import HelloWorldPage from "containers/HelloWorldPage";
-import ImagePage from "containers/ImagePage";
+import AssetsPage from "containers/AssetsPage";
 import ApiPage from "containers/ApiPage";
 import CounterPage from "containers/CounterPage";
 
@@ -24,7 +24,7 @@ export default (
       <Route path = {PATHS.ROOT} component = {MainPage}>
         <IndexRoute component = {HelloWorldPage} />
         <Route path = {PATHS.HELLO_WORLD_PAGE} component = {HelloWorldPage} />
-        <Route path = {PATHS.IMAGE_PAGE} component = {ImagePage} />
+        <Route path = {PATHS.ASSETS_PAGE} component = {AssetsPage} />
         <Route path = {PATHS.API_PAGE} component = {ApiPage} />
         <Route path = {PATHS.COUNTER_PAGE} component = {CounterPage} />
       </Route>

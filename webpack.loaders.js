@@ -7,8 +7,8 @@ const js = {
   query:   {}
 };
 
-const image = {
-  test:   /\.(jpeg|jpg|png|gif|svg)$/,
+const url = {
+  test:   /\.(jpeg|jpg|png|gif|svg|mp3|ogg)$/,
   loader: "url-loader",
   query:  {
     limit: 10000,
@@ -17,7 +17,7 @@ const image = {
 };
 
 const file = {
-  test:   /\.(woff|woff2|ttf|eot)$/,
+  test:   /\.(woff|woff2|ttf|eot|mp4|webm)$/,
   loader: "file-loader",
   query:  {
     name: "[name].[ext]"
@@ -47,7 +47,7 @@ const extractCss = {
 
 module.exports = {
   js,
-  image,
+  url,
   file,
   json,
   css,

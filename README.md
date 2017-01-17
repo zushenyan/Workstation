@@ -28,7 +28,6 @@ There is an [issue](https://github.com/reactjs/react-router-redux/issues/197) wh
 #### Todos
 - Support Webpack 2
 - Support Progressive Web Application.
-- Support audio assets.
 
 #### Branches
 Other branches are legacy/experiments, please ignore them.

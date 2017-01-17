@@ -10,7 +10,7 @@ export default class MainPage extends PureComponent {
           <h1>Navigator</h1>
           <ul>
             <li><Link to = {PATHS.HELLO_WORLD_PAGE}>hello world</Link></li>
-            <li><Link to = {PATHS.IMAGE_PAGE}>test image bundling</Link></li>
+            <li><Link to = {PATHS.ASSETS_PAGE}>test assets bundling</Link></li>
             <li><Link to = {PATHS.API_PAGE}>test api call</Link></li>
             <li><Link to = {PATHS.COUNTER_PAGE}>counter</Link></li>
           </ul>
