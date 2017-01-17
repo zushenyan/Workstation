@@ -2,10 +2,10 @@ import "!style-loader!css-loader!stylesheets/normalize.css";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import routes from "routing";
+import root from "routing";
 
 ReactDOM.render(
-  routes,
+  root,
   document.getElementById("app")
 );
 

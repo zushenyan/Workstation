@@ -21,8 +21,12 @@ Features
 - `yarn test` - start running tests with Jest.
 
 # Known Issues
-#### Why is `react-router` not the latest version?
-There is an [issue](https://github.com/reactjs/react-router-redux/issues/197) when using `hashHistory`, so I downgrade to `2.8.0` instead.
+#### Don' use hashHistory at this moment.
+https://github.com/reactjs/react-router-redux/issues/481
+
+#### Why is your `Provider` in this structure?
+https://github.com/reactjs/react-router-redux/issues/179
+https://alejandronapoles.com/2016/09/19/fixing-hot-reloading-with-react-router/
 
 # For Developer
 #### Todos
