@@ -7,20 +7,36 @@ const js = {
   query:   {}
 };
 
-const url = {
-  test:   /\.(jpeg|jpg|png|gif|svg|mp3|ogg)$/,
+const video = {
+  test:   /\.(mp3|ogg)$/,
   loader: "url-loader",
   query:  {
     limit: 10000,
-    name: "[name].[ext]"
+    name: "[name]-[hash:6].[ext]"
   }
 };
 
-const file = {
-  test:   /\.(woff|woff2|ttf|eot|mp4|webm)$/,
+const image = {
+  test: /.(jpeg|jpg|png|gif|svg)$/,
+  loaders: [
+    "url-loader?limit=10000&name=[name]-[hash:6].[ext]",
+    "image-webpack?{optimizationLevel: 7, interlaced: false, pngquant:{quality: '65-90', speed: 4}, mozjpeg: {quality: 65}}"
+  ]
+};
+
+const font = {
+  test:   /\.(woff|woff2|ttf|eot)$/,
   loader: "file-loader",
   query:  {
-    name: "[name].[ext]"
+    name: "[name]-[hash:6].[ext]"
+  }
+};
+
+const audio = {
+  test:   /\.(mp4|webm)$/,
+  loader: "file-loader",
+  query:  {
+    name: "[name]-[hash:6].[ext]"
   }
 };
 
@@ -47,8 +63,10 @@ const extractCss = {
 
 module.exports = {
   js,
-  url,
-  file,
+  video,
+  image,
+  font,
+  audio,
   json,
   css,
   extractCss

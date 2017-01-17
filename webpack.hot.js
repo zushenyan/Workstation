@@ -4,8 +4,10 @@ const config            = require("./webpack.development.js");
 const serverConfig      = require("./config/server-config");
 const {
   js,
-  url,
-  file,
+  font,
+  audio,
+  video,
+  image,
   json,
   css
 } = require("./webpack.loaders.js");
@@ -22,7 +24,7 @@ module.exports = Object.assign(config, {
     publicPath: `${serverConfig.devServerAddress}/`
   }),
   module: {
-    loaders: [js, url, file, json, css]
+    loaders: [js, image, audio, video, font, json, css]
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),

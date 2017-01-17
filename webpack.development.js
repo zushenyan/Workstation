@@ -5,8 +5,10 @@ const autoprefixer      = require("autoprefixer");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const {
   js,
-  url,
-  file,
+  font,
+  audio,
+  video,
+  image,
   json,
   extractCss
 } = require("./webpack.loaders.js");
@@ -22,7 +24,7 @@ module.exports = {
     filename:   "[name].js"
   },
   module: {
-    loaders: [js, json, url, file, extractCss]
+    loaders: [js, json, image, audio, video, font, extractCss]
   },
   resolve: {
     root:  path.resolve(__dirname),
