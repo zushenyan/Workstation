@@ -12,7 +12,7 @@ const {
 } = require("./webpack.loaders.js");
 
 module.exports = {
-  devtool: "inline-source-map",
+  devtool: "eval",
   entry: {
     app: ["babel-polyfill", "./src/index.js"]
   },
