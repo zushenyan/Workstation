@@ -22,11 +22,11 @@ Features
 
 # Known Issues
 #### Don' use hashHistory at this moment.
-https://github.com/reactjs/react-router-redux/issues/481
+- https://github.com/reactjs/react-router-redux/issues/481
 
 #### Why is your `Provider` in this structure?
-https://github.com/reactjs/react-router-redux/issues/179
-https://alejandronapoles.com/2016/09/19/fixing-hot-reloading-with-react-router/
+- https://github.com/reactjs/react-router-redux/issues/179
+- https://alejandronapoles.com/2016/09/19/fixing-hot-reloading-with-react-router/
 
 # For Developer
 #### Todos
