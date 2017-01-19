@@ -1,14 +1,13 @@
 const webpack           = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const config            = require("./webpack.development.js");
 const {
   js,
+  font,
   image,
   audio,
   video,
-  font,
-  json,
   extractCss
 } = require("./webpack.loaders.js");
 
@@ -18,15 +17,22 @@ module.exports = Object.assign(config, {
     filename:   "[name]-[chunkhash:6].js"
   }),
   module: Object.assign(config.module, {
-    loaders: [js, json, image, audio, video, font, extractCss]
+    loaders: [js, font, image, audio, video, extractCss]
   }),
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new ExtractTextPlugin("[name]-[chunkhash:6].css"),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname
+      }
+    }),
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify("production")
       }
+    }),
+    new ExtractTextPlugin({
+      filename:  "[name]-[chunkhash:6].css",
+      allChunks: true
     }),
     new HtmlWebpackPlugin({
       template: "./src/index.ejs"
@@ -40,13 +46,15 @@ module.exports = Object.assign(config, {
         drop_console: true
       }
     }),
-    new webpack.optimize.DedupePlugin(),
+    // how to seperate 3rd-party lib code from our code
+    // https://github.com/webpack/webpack/issues/1315
+    // https://jeremygayed.com/dynamic-vendor-bundling-in-webpack-528993e48aab#.t08fegesc
     new webpack.optimize.CommonsChunkPlugin({
-      // the first one is manifest js file for webpack runtime code.
-      // the second one is the actual common vendor code for sharing among all entries.
-      // https://jeremygayed.com/dynamic-vendor-bundling-in-webpack-528993e48aab#.f1u14l20q
-      names: ["manifest", "vendor"],
+      name: "vendor.js",
       minChunks: ({resource}) => /node_modules/.test(resource)
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "manifest.js"
     })
   ]
 });

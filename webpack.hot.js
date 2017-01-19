@@ -5,10 +5,9 @@ const serverConfig      = require("./config/server-config");
 const {
   js,
   font,
+  image,
   audio,
   video,
-  image,
-  json,
   css
 } = require("./webpack.loaders.js");
 
@@ -24,10 +23,14 @@ module.exports = Object.assign(config, {
     publicPath: `${serverConfig.devServerAddress}/`
   }),
   module: {
-    loaders: [js, image, audio, video, font, json, css]
+    loaders: [js, image, audio, video, font, css]
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname
+      }
+    }),
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify("development")
@@ -37,6 +40,6 @@ module.exports = Object.assign(config, {
       template: "./src/index.ejs"
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 });

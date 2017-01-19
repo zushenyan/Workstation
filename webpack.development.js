@@ -1,20 +1,18 @@
 const webpack           = require("webpack");
-const path              = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const autoprefixer      = require("autoprefixer");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const path              = require("path");
 const {
   js,
   font,
   audio,
   video,
   image,
-  json,
   extractCss
 } = require("./webpack.loaders.js");
 
 module.exports = {
-  devtool: "eval",
+  devtool: "inline-source-map",
   entry: {
     app: ["babel-polyfill", "./src/index.js"]
   },
@@ -24,10 +22,13 @@ module.exports = {
     filename:   "[name].js"
   },
   module: {
-    loaders: [js, json, image, audio, video, font, extractCss]
+    loaders: [js, image, audio, video, font, extractCss]
   },
   resolve: {
-    root:  path.resolve(__dirname),
+    modules: [
+      path.resolve(__dirname),
+      "node_modules"
+    ],
     alias: {
       "src":         "src",
       "api":         "src/api",
@@ -52,23 +53,25 @@ module.exports = {
       "config":      "config",
       "mock-data":   "mock-data",
     },
-    extensions: ["", ".js", ".jsx", ".json"]
+    extensions: [".js", ".jsx", ".json"]
   },
   plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname
+      }
+    }),
     new webpack.DefinePlugin({
       "process.env": {
         "NODE_ENV": JSON.stringify("development")
       }
     }),
-    new ExtractTextPlugin("[name].css"),
+    new ExtractTextPlugin({
+      filename:  "[name].css",
+      allChunks: true
+    }),
     new HtmlWebpackPlugin({
       template: "./src/index.ejs"
     })
-  ],
-
-  // loaders' settings
-  postcss: [
-    autoprefixer()
   ]
 };

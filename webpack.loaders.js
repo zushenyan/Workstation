@@ -9,18 +9,38 @@ const js = {
 
 const video = {
   test:   /\.(mp3|ogg)$/,
-  loader: "url-loader",
-  query:  {
-    limit: 10000,
-    name: "[name]-[hash:6].[ext]"
-  }
+  loaders: [
+    {
+      loader: "url-loader",
+      query: {
+        limit: 10000,
+        name:  "[name]-[hash:6].[ext]"
+      }
+    }
+  ]
 };
 
 const image = {
   test: /.(jpeg|jpg|png|gif|svg)$/,
   loaders: [
-    "url-loader?limit=10000&name=[name]-[hash:6].[ext]",
-    "image-webpack?{optimizationLevel: 7, interlaced: false, pngquant:{quality: '65-90', speed: 4}, mozjpeg: {quality: 65}}"
+    {
+      loader: "url-loader",
+      query: {
+        limit: 10000,
+        name:  "[name]-[hash:6].[ext]"
+      }
+    },
+    {
+      loader: "image-webpack-loader",
+      query: {
+        optimizationLevel: 7,
+        interlaced:        false,
+        pngquant:          {
+          quality: "65-90",
+          speed:   4
+        }
+      }
+    }
   ]
 };
 
@@ -40,25 +60,34 @@ const audio = {
   }
 };
 
-const json = {
-  test:   /\.json$/,
-  loader: "json-loader",
-  query:  {}
-};
-
 const css = {
   test:    /\.(scss|sass)$/,
   loaders: [
     "style-loader",
-    "css-loader?modules&localIdentName=[name]-[local]-[hash:6]&sourceMap",
+    {
+      loader: "css-loader",
+      query: {
+        modules:        true,
+        sourceMap:      true,
+        localIdentName: "[name]-[local]-[hash:6]",
+      }
+    },
     "postcss-loader",
-    "sass-loader?sourceMap"
+    {
+      loader: "sass-loader",
+      query: {
+        sourceMap: true
+      }
+    }
   ]
 };
 
 const extractCss = {
   test:    /\.(scss|sass)$/,
-  loader: ExtractTextPlugin.extract("style", "css?modules&localIdentName=[name]-[local]-[hash:6]!postcss!sass")
+  loader: ExtractTextPlugin.extract({
+    fallbackLoader: "style-loader",
+    loader:         "css-loader?modules&localIdentName=[name]-[local]-[hash:6]!postcss-loader!sass-loader"
+  })
 };
 
 module.exports = {
@@ -67,7 +96,6 @@ module.exports = {
   image,
   font,
   audio,
-  json,
   css,
   extractCss
 };
