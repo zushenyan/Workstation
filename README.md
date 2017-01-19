@@ -2,7 +2,7 @@
 A universal workstation for building react app.
 
 Features
-- Webpack 1
+- Webpack 2
 - ESLint
 - SASSLint
 - flow.js
@@ -33,7 +33,6 @@ Features
 
 # For Developer
 #### Todos
-- Support Webpack 2
 - Support Progressive Web Application.
 
 #### Branches
