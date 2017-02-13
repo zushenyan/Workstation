@@ -14,7 +14,7 @@ Features
 - bundle optimization
 
 # Scripts
-- `yarn start`- start development server. Default on `your_ip_address:8080`.
+- `yarn dev`- start development server. Default on `your_ip_address:8080`.
 - `yarn api` - start mock API server. Default on `your_ip_address:8081`.
 - `yarn watch` - start development build. Output to `dist` folder. Also `watch` files change.
 - `yarn build` - start production build. Output to `dist` folder.
