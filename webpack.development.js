@@ -19,7 +19,8 @@ module.exports = {
   output: {
     path:       path.resolve(__dirname, "./dist"),
     publicPath: "./",
-    filename:   "[name].js"
+    filename:   "[name].js",
+    chunkFilename: "[name].js"
   },
   module: {
     loaders: [js, image, audio, video, font, extractCss]

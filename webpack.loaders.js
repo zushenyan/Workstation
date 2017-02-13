@@ -85,8 +85,18 @@ const css = {
 const extractCss = {
   test:    /\.(scss|sass)$/,
   loader: ExtractTextPlugin.extract({
-    fallbackLoader: "style-loader",
-    loader:         "css-loader?modules&localIdentName=[name]-[local]-[hash:6]!postcss-loader!sass-loader"
+    fallback: "style-loader",
+    use: [
+      {
+        loader: "css-loader",
+        query: {
+          modules: true,
+          localIdentName: "[name]-[local]-[hash:6]"
+        }
+      },
+      "postcss-loader",
+      "sass-loader"
+    ]
   })
 };
 

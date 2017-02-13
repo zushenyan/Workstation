@@ -6,22 +6,46 @@ import {
 } from "react-router";
 import { history } from "store";
 
-import MainPage from "containers/MainPage";
-import HelloWorldPage from "containers/HelloWorldPage";
-import AssetsPage from "containers/AssetsPage";
-import ApiPage from "containers/ApiPage";
-import CounterPage from "containers/CounterPage";
-
 import * as PATHS from "constants/paths";
+
+const MainPage = (location, cb) => {
+  require.ensure([], (require) => {
+    cb(null, require("containers/MainPage").default);
+  }, "MainPage");
+};
+
+const HelloWorldPage = (location, cb) => {
+  require.ensure([], (require) => {
+    cb(null, require("containers/HelloWorldPage").default);
+  }, "HelloWorldPage");
+};
+
+const AssetsPage = (location, cb) => {
+  require.ensure([], (require) => {
+    cb(null, require("containers/AssetsPage").default);
+  }, "AssetsPage");
+};
+
+const ApiPage = (location, cb) => {
+  require.ensure([], (require) => {
+    cb(null, require("containers/ApiPage").default);
+  }, "ApiPage");
+};
+
+const CounterPage = (location, cb) => {
+  require.ensure([], (require) => {
+    cb(null, require("containers/CounterPage").default);
+  }, "CounterPage");
+};
 
 export default (
   <Router history = {history}>
-    <Route path = {PATHS.ROOT} component = {MainPage}>
-      <IndexRoute component = {HelloWorldPage} />
-      <Route path = {PATHS.HELLO_WORLD_PAGE} component = {HelloWorldPage} />
-      <Route path = {PATHS.ASSETS_PAGE} component = {AssetsPage} />
-      <Route path = {PATHS.API_PAGE} component = {ApiPage} />
-      <Route path = {PATHS.COUNTER_PAGE} component = {CounterPage} />
+    <Route path = {PATHS.ROOT} getComponent = {MainPage}>
+      <IndexRoute getComponent = {HelloWorldPage} />
+      <Route path = {PATHS.HELLO_WORLD_PAGE} getComponent = {HelloWorldPage} />
+      <Route path = {PATHS.ASSETS_PAGE} getComponent = {AssetsPage} />
+      <Route path = {PATHS.API_PAGE} getComponent = {ApiPage} />
+      <Route path = {PATHS.COUNTER_PAGE} getComponent = {CounterPage} />
     </Route>
   </Router>
 );

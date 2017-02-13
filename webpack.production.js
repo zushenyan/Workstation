@@ -14,7 +14,8 @@ const {
 module.exports = Object.assign(config, {
   devtool: "",
   output: Object.assign(config.output, {
-    filename:   "[name]-[chunkhash:6].js"
+    filename:   "[name]-[chunkhash:6].js",
+    chunkFilename: "[name]-[chunkhash:6].js"
   }),
   module: Object.assign(config.module, {
     loaders: [js, font, image, audio, video, extractCss]
