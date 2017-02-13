@@ -8,6 +8,11 @@ import { history } from "store";
 
 import * as PATHS from "constants/paths";
 
+// you can check https://webpack.js.org/guides/code-splitting/#on-demand-code-splitting
+// for more advanced way to do async module importing.
+// the duplicated codes and hard-coded path is necessary because bundle name changes after bundling.
+// if you find this uncomfortable you might want to check bundle loader.
+// https://github.com/webpack-contrib/bundle-loader
 const MainPage = (location, cb) => {
   require.ensure([], (require) => {
     cb(null, require("containers/MainPage").default);
