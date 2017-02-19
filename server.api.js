@@ -1,7 +1,7 @@
 const path         = require("path");
 const jsonServer   = require("json-server");
 const open         = require("open");
-const serverConfig = require("./config/server-config");
+const serverConfig = require("./configs/server-config");
 
 const server      = jsonServer.create();
 const router      = jsonServer.router(path.join(__dirname, "./mock-data/db.json"));

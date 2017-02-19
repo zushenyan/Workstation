@@ -37,12 +37,13 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.3.0"
+    "webpack-dev-server": "^2.3.0",
+    "webpack-merge": "^2.6.1"
   },
   "scripts": {
-    "dev": "node server.development.js",
-    "build": "rm -rf ./dist && webpack -p --config webpack.production.js",
-    "watch": "rm -rf ./dist && webpack --watch --config webpack.development.js",
+    "dev": "NODE_ENV='development' node server.development.js",
+    "build": "rm -rf ./dist/* && NODE_ENV='production' webpack -p --config ./configs/webpack.production.js",
+    "watch": "rm -rf ./dist/* && NODE_ENV='development' webpack --watch --config ./configs/webpack.development.js",
     "test": "jest --watch --no-cache",
     "api": "node server.api.js"
   },
