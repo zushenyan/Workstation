@@ -6,9 +6,9 @@ module.exports = {
     app: ["babel-polyfill", path.resolve(root, "src/index.js")]
   },
   output: {
-    path:       path.resolve(root, "dist"),
-    publicPath: "./",
-    filename:   "[name].js",
+    path:          path.resolve(root, "dist"),
+    publicPath:    "./",
+    filename:      "[name].js",
     chunkFilename: "[name].js"
   },
   resolve: {
@@ -40,6 +40,6 @@ module.exports = {
       "config":      path.resolve(root, "config"),
       "mock-data":   path.resolve(root, "mock-data"),
     },
-    extensions: [".js", ".jsx", ".json"]
+    extensions: [".js", ".jsx", ".json", "scss", "css"]
   }
 };

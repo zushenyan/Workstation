@@ -19,7 +19,7 @@ const {
 
 commonConfig.entry.app.unshift(
   `webpack-dev-server/client?${serverConfig.devServerAddress}`,
-  "webpack/hot/dev-server"
+  "webpack/hot/only-dev-server"
 );
 
 module.exports = merge(
