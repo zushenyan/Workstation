@@ -1,7 +1,7 @@
-const autoprefixer = require("autoprefixer");
+const cssnext = require("postcss-cssnext");
 
 module.exports = {
   plugins : [
-    autoprefixer()
+    cssnext()
   ]
 };
