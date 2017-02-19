@@ -12,7 +12,8 @@ import immatureHistory from "./history";
 import {
   logger,
   router,
-  saga
+  saga,
+  immutableStateInvariant
 } from "./middlewares";
 
 const middlewareEnhancer = (() => {
@@ -20,6 +21,7 @@ const middlewareEnhancer = (() => {
     return composeWithDevTools(applyMiddleware(
       saga,
       router,
+      immutableStateInvariant,
       logger
     ));
   }
@@ -28,9 +30,7 @@ const middlewareEnhancer = (() => {
 
 const store = createStore(rootReducer, undefined, middlewareEnhancer);
 
-const history = syncHistoryWithStore(immatureHistory, store, {
-  selectLocationState: (state) => state.get("routing").toJS()
-});
+const history = syncHistoryWithStore(immatureHistory, store);
 
 saga.run(rootSaga);
 

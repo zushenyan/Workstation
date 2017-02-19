@@ -1,4 +1,4 @@
-import { combineReducers } from "redux-immutable";
+import { combineReducers } from "redux";
 
 import counter from "./Counter";
 import api from "./Api";

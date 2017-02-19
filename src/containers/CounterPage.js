@@ -8,7 +8,7 @@ import {
 } from "actions/Counter";
 
 const mapStateToProps = (state, ownProps) => ({
-  counter: state.getIn(["counter", "counter"])
+  counter: state.counter.counter
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
