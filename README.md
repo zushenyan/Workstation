@@ -21,7 +21,7 @@ Features
 - `yarn test` - start running tests with Jest.
 
 # Known Issues
-#### Don' use `hashHistory` at this moment.
+#### Why is your `react-router` not the latest?
 - https://github.com/reactjs/react-router-redux/issues/481
 
 #### Why is your `Provider` in this structure?
