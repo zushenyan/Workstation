@@ -1,6 +1,5 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { store } from "store";
 import routes from "./routes";
 
 const Root = ({store}) => {
@@ -11,4 +10,4 @@ const Root = ({store}) => {
   );
 };
 
-export default (<Root store = {store} />);
+export default Root;

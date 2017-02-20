@@ -2,15 +2,14 @@ import "!style-loader!css-loader!stylesheets/normalize.css";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import root from "routing";
+import { store } from "store";
+import Root from "routing";
 
 ReactDOM.render(
-  root,
+  <Root store = {store} />,
   document.getElementById("app")
 );
 
-if(process.env.NODE_ENV === "development"){
-  if (module.hot) {
-    module.hot.accept();
-  }
+if (module.hot) {
+  module.hot.accept();
 }
