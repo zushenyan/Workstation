@@ -1,22 +1,23 @@
-const webpack           = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const path              = require("path");
-const { root }          = require("./webpack.paths.js");
+const webpack              = require("webpack");
+const HtmlWebpackPlugin    = require("html-webpack-plugin");
+const ExtractTextPlugin    = require("extract-text-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const path                 = require("path");
+const { root }             = require("./webpack.paths.js");
 
-const loaderOptions = new webpack.LoaderOptionsPlugin({
+exports.loaderOptions = new webpack.LoaderOptionsPlugin({
   options: {
     context: root
   }
 });
 
-const environmentFlags = new webpack.DefinePlugin({
+exports.environmentFlags = new webpack.DefinePlugin({
   "process.env": {
     "NODE_ENV": JSON.stringify(process.env.NODE_ENV)
   }
 });
 
-const uglifyJs = new webpack.optimize.UglifyJsPlugin({
+exports.uglifyJs = new webpack.optimize.UglifyJsPlugin({
   output: {
     comments: false
   },
@@ -29,16 +30,16 @@ const uglifyJs = new webpack.optimize.UglifyJsPlugin({
 // how to seperate 3rd-party lib code from our code
 // https://github.com/webpack/webpack/issues/1315
 // https://jeremygayed.com/dynamic-vendor-bundling-in-webpack-528993e48aab#.t08fegesc
-const commonsChunkVendor = new webpack.optimize.CommonsChunkPlugin({
+exports.commonsChunkVendor = new webpack.optimize.CommonsChunkPlugin({
   name: "vendor.js",
   minChunks: ({resource}) => /node_modules/.test(resource)
 });
 
-const commonsChunkManifest = new webpack.optimize.CommonsChunkPlugin({
+exports.commonsChunkManifest = new webpack.optimize.CommonsChunkPlugin({
   name: "manifest.js"
 });
 
-const extractText = (() => {
+exports.extractText = (() => {
   const config = {
     filename:  "[name].css",
     allChunks: true
@@ -49,21 +50,10 @@ const extractText = (() => {
   return new ExtractTextPlugin(config);
 })();
 
-const htmlWebpack = new HtmlWebpackPlugin({
+exports.htmlWebpack = new HtmlWebpackPlugin({
   template: path.resolve(root, "src/index.ejs")
 });
 
-const hotModuleReplacement   = new webpack.HotModuleReplacementPlugin();
-const noEmitOnErrors         = new webpack.NoEmitOnErrorsPlugin();
-
-module.exports = {
-  loaderOptions,
-  environmentFlags,
-  uglifyJs,
-  commonsChunkVendor,
-  commonsChunkManifest,
-  extractText,
-  htmlWebpack,
-  hotModuleReplacement,
-  noEmitOnErrors
-};
+exports.hotModuleReplacement = new webpack.HotModuleReplacementPlugin();
+exports.noEmitOnErrors       = new webpack.NoEmitOnErrorsPlugin();
+exports.bundleAnalyzerPlugin = new BundleAnalyzerPlugin();

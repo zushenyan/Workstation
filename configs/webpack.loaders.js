@@ -1,13 +1,13 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-const js = {
+exports.js = {
   test:    /\.(js|jsx)?$/,
   exclude: /node_modules/,
   loader:  "babel-loader",
   query:   {}
 };
 
-const video = {
+exports.video = {
   test:   /\.(mp3|ogg)$/,
   loaders: [
     {
@@ -20,7 +20,7 @@ const video = {
   ]
 };
 
-const image = {
+exports.image = {
   test: /.(jpeg|jpg|png|gif|svg)$/,
   loaders: [
     {
@@ -44,7 +44,7 @@ const image = {
   ]
 };
 
-const font = {
+exports.font = {
   test:   /\.(woff|woff2|ttf|eot)$/,
   loader: "file-loader",
   query:  {
@@ -52,7 +52,7 @@ const font = {
   }
 };
 
-const audio = {
+exports.audio = {
   test:   /\.(mp4|webm)$/,
   loader: "file-loader",
   query:  {
@@ -60,7 +60,7 @@ const audio = {
   }
 };
 
-const css = {
+exports.css = {
   test:    /\.(scss|sass)$/,
   loaders: [
     "style-loader",
@@ -82,7 +82,7 @@ const css = {
   ]
 };
 
-const extractCss = {
+exports.extractCss = {
   test:    /\.(scss|sass)$/,
   loader: ExtractTextPlugin.extract({
     fallback: "style-loader",
@@ -98,14 +98,4 @@ const extractCss = {
       "sass-loader"
     ]
   })
-};
-
-module.exports = {
-  js,
-  video,
-  image,
-  font,
-  audio,
-  css,
-  extractCss
 };
