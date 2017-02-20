@@ -5,10 +5,14 @@ import ReactDOM from "react-dom";
 import { store } from "store";
 import Root from "routing";
 
-ReactDOM.render(
-  <Root store = {store} />,
-  document.getElementById("app")
-);
+const render = (app) => {
+  ReactDOM.render(
+    app,
+    document.getElementById("app")
+  );
+};
+
+render(<Root store = {store} />);
 
 if (module.hot) {
   module.hot.accept();
