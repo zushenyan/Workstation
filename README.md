@@ -5,16 +5,20 @@ Features
 - Webpack 2
 - ESLint
 - SASSLint
+- CssNext support
 - flow.js
 - Jest
 - Redux eco-system
 - mock API server
-- development server
+- normal watch development server
+- hot development server
 - custom template `index.html`
 - bundle optimization
+- offline first
+- webpack bundle analyze
 
 # Scripts
-- `yarn dev`- start development server. Default on `your_ip_address:8080`.
+- `yarn dev`- start development server. Default on `your_ip_address:8080`. This will bring out bundle analyzer in Chrome new tab.
 - `yarn api` - start mock API server. Default on `your_ip_address:8081`.
 - `yarn watch` - start development build. Output to `dist` folder. Also `watch` files change.
 - `yarn build` - start production build. Output to `dist` folder.

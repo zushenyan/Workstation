@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV === "production"){
+  require("offline-plugin/runtime").install();
+}
+
 import "!style-loader!css-loader!stylesheets/normalize.css";
 
 import React from "react";

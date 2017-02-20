@@ -2,6 +2,7 @@ const webpack              = require("webpack");
 const HtmlWebpackPlugin    = require("html-webpack-plugin");
 const ExtractTextPlugin    = require("extract-text-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const OfflinePlugin        = require("offline-plugin");
 const path                 = require("path");
 const { root }             = require("./webpack.paths.js");
 
@@ -57,3 +58,4 @@ exports.htmlWebpack = new HtmlWebpackPlugin({
 exports.hotModuleReplacement = new webpack.HotModuleReplacementPlugin();
 exports.noEmitOnErrors       = new webpack.NoEmitOnErrorsPlugin();
 exports.bundleAnalyzerPlugin = new BundleAnalyzerPlugin();
+exports.offlinePlugin        = new OfflinePlugin();

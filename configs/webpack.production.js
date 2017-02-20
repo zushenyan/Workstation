@@ -16,7 +16,8 @@ const {
   uglifyJs,
   commonsChunkVendor,
   commonsChunkManifest,
-  bundleAnalyzerPlugin
+  bundleAnalyzerPlugin,
+  offlinePlugin
 } = require("./webpack.plugins.js");
 
 module.exports = merge(
@@ -45,7 +46,8 @@ module.exports = merge(
       uglifyJs,
       commonsChunkVendor,
       commonsChunkManifest,
-      bundleAnalyzerPlugin
+      bundleAnalyzerPlugin,
+      offlinePlugin
     ]
   }
 );
