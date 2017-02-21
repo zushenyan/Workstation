@@ -16,7 +16,9 @@ module.exports = {
       paths.root,
       "node_modules"
     ],
-    alias: paths,
+    alias: Object.assign({}, paths, {
+      // fill in other customizations
+    }),
     extensions: [".js", ".jsx", ".json", "scss", "css"]
   }
 };
