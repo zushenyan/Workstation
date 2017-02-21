@@ -12,7 +12,7 @@ exports.loaderOptions = new webpack.LoaderOptionsPlugin({
   }
 });
 
-exports.environmentFlags = new webpack.DefinePlugin({
+exports.environmentVariables = new webpack.DefinePlugin({
   "process.env": {
     "NODE_ENV": JSON.stringify(process.env.NODE_ENV)
   }

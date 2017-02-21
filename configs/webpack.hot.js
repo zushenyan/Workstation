@@ -29,7 +29,7 @@ module.exports = merge(
     },
     plugins: [
       plugins.loaderOptions,
-      plugins.environmentFlags,
+      plugins.environmentVariables,
       plugins.htmlWebpack,
       plugins.hotModuleReplacement,
       plugins.noEmitOnErrors

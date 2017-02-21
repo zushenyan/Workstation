@@ -23,7 +23,7 @@ module.exports = merge(
     },
     plugins: [
       plugins.loaderOptions,
-      plugins.environmentFlags,
+      plugins.environmentVariables,
       plugins.extractText,
       plugins.htmlWebpack,
       plugins.uglifyJs,
