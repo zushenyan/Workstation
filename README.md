@@ -21,7 +21,7 @@ Features
 - `yarn dev`- start development server. Default on `your_ip_address:8080`.
 - `yarn api` - start mock API server. Default on `your_ip_address:8081`.
 - `yarn watch` - start development build. Output to `dist` folder. Also `watch` files change.
-- `yarn build` - start production build. Output to `dist` folder. This will bring out bundle analyzer in Chrome new tab.
+- `yarn build` - start production build. Output to `dist` folder and generate a `stats.html` under root directory for visualized bundle size report.
 - `yarn test` - start running tests with Jest.
 
 # Known Issues

@@ -54,7 +54,12 @@ exports.htmlWebpack = new HtmlWebpackPlugin({
   template: `${paths.src}/index.ejs`
 });
 
+exports.bundleAnalyzerPlugin = new BundleAnalyzerPlugin({
+  analyzerMode:   "static",
+  openAnalyzer:   false,
+  reportFilename: `${paths.root}/stats.html`
+});
+
 exports.hotModuleReplacement = new webpack.HotModuleReplacementPlugin();
 exports.noEmitOnErrors       = new webpack.NoEmitOnErrorsPlugin();
-exports.bundleAnalyzerPlugin = new BundleAnalyzerPlugin();
 exports.offlinePlugin        = new OfflinePlugin();
