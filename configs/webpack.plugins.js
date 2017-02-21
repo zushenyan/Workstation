@@ -3,6 +3,7 @@ const HtmlWebpackPlugin    = require("html-webpack-plugin");
 const ExtractTextPlugin    = require("extract-text-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const OfflinePlugin        = require("offline-plugin");
+const path                 = require("path");
 const paths                = require("./webpack.paths.js");
 
 exports.loaderOptions = new webpack.LoaderOptionsPlugin({
@@ -51,13 +52,13 @@ exports.extractText = (() => {
 })();
 
 exports.htmlWebpack = new HtmlWebpackPlugin({
-  template: `${paths.src}/index.ejs`
+  template: path.resolve(paths.src, "index.ejs")
 });
 
 exports.bundleAnalyzerPlugin = new BundleAnalyzerPlugin({
   analyzerMode:   "static",
   openAnalyzer:   false,
-  reportFilename: `${paths.root}/stats.html`
+  reportFilename: path.resolve(paths.root, "stats.html")
 });
 
 exports.hotModuleReplacement = new webpack.HotModuleReplacementPlugin();

@@ -1,8 +1,9 @@
+const path  = require("path");
 const paths = require("./webpack.paths.js");
 
 module.exports = {
   entry: {
-    app: ["babel-polyfill", `${paths.src}/index.js`]
+    app: ["babel-polyfill", path.resolve(paths.src, "index.js")]
   },
   output: {
     path:          paths.dist,
