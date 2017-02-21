@@ -1,5 +1,5 @@
 # Introduction
-A universal workstation for building react app.
+A client-side rendering workstation for building react app.
 
 Features
 - Webpack 2
@@ -18,10 +18,10 @@ Features
 - webpack bundle analyze
 
 # Scripts
-- `yarn dev`- start development server. Default on `your_ip_address:8080`. This will bring out bundle analyzer in Chrome new tab.
+- `yarn dev`- start development server. Default on `your_ip_address:8080`.
 - `yarn api` - start mock API server. Default on `your_ip_address:8081`.
 - `yarn watch` - start development build. Output to `dist` folder. Also `watch` files change.
-- `yarn build` - start production build. Output to `dist` folder.
+- `yarn build` - start production build. Output to `dist` folder. This will bring out bundle analyzer in Chrome new tab.
 - `yarn test` - start running tests with Jest.
 
 # Known Issues
@@ -36,8 +36,7 @@ Features
 - https://github.com/tcoopman/image-webpack-loader/issues/51
 
 # For Developer
-#### Todos
-- Support Progressive Web Application.
+#### Support local/session storage
 
 #### Branches
 Other branches are legacy/experiments, please ignore them.
