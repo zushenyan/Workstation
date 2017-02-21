@@ -1,10 +1,10 @@
-const path         = require("path");
 const jsonServer   = require("json-server");
 const open         = require("open");
 const serverConfig = require("./configs/server-config");
+const paths = require("./configs/webpack.paths.js");
 
 const server      = jsonServer.create();
-const router      = jsonServer.router(path.join(__dirname, "./mock-data/db.json"));
+const router      = jsonServer.router(`${paths["mock-data"]}/db.json`);
 const middlewares = jsonServer.defaults();
 
 server.use(middlewares);

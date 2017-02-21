@@ -1,21 +1,8 @@
-const merge             = require("webpack-merge");
-const serverConfig      = require("./server-config.js");
-const commonConfig      = require("./webpack.common.js");
-const {
-  js,
-  font,
-  audio,
-  video,
-  image,
-  css
-} = require("./webpack.loaders.js");
-const {
-  loaderOptions,
-  environmentFlags,
-  htmlWebpack,
-  hotModuleReplacement,
-  noEmitOnErrors
-} = require("./webpack.plugins.js");
+const merge        = require("webpack-merge");
+const serverConfig = require("./server-config.js");
+const commonConfig = require("./webpack.common.js");
+const loaders      = require("./webpack.loaders.js");
+const plugins      = require("./webpack.plugins.js");
 
 commonConfig.entry.app.unshift(
   `webpack-dev-server/client?${serverConfig.devServerAddress}`,
@@ -32,20 +19,20 @@ module.exports = merge(
     },
     module: {
       loaders: [
-        js,
-        image,
-        audio,
-        video,
-        font,
-        css
+        loaders.js,
+        loaders.image,
+        loaders.audio,
+        loaders.video,
+        loaders.font,
+        loaders.css
       ]
     },
     plugins: [
-      loaderOptions,
-      environmentFlags,
-      htmlWebpack,
-      hotModuleReplacement,
-      noEmitOnErrors
+      plugins.loaderOptions,
+      plugins.environmentFlags,
+      plugins.htmlWebpack,
+      plugins.hotModuleReplacement,
+      plugins.noEmitOnErrors
     ]
   }
 );

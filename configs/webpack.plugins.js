@@ -3,12 +3,11 @@ const HtmlWebpackPlugin    = require("html-webpack-plugin");
 const ExtractTextPlugin    = require("extract-text-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const OfflinePlugin        = require("offline-plugin");
-const path                 = require("path");
-const { root }             = require("./webpack.paths.js");
+const paths                = require("./webpack.paths.js");
 
 exports.loaderOptions = new webpack.LoaderOptionsPlugin({
   options: {
-    context: root
+    context: paths.root
   }
 });
 
@@ -52,7 +51,7 @@ exports.extractText = (() => {
 })();
 
 exports.htmlWebpack = new HtmlWebpackPlugin({
-  template: path.resolve(root, "src/index.ejs")
+  template: `${paths.src}/index.ejs`
 });
 
 exports.hotModuleReplacement = new webpack.HotModuleReplacementPlugin();

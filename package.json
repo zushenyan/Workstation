@@ -26,7 +26,6 @@
     "image-webpack-loader": "2.0.0",
     "ip": "^1.1.4",
     "jest": "^18.1.0",
-    "json-loader": "^0.5.4",
     "json-server": "^0.9.5",
     "node-sass": "^4.5.0",
     "offline-plugin": "^4.6.1",
@@ -45,7 +44,7 @@
     "webpack-merge": "^3.0.0"
   },
   "scripts": {
-    "dev": "NODE_ENV='development' node server.development.js",
+    "dev": "NODE_ENV='development' node server.hot.js",
     "build": "rm -rf ./dist/* && NODE_ENV='production' webpack -p --config ./configs/webpack.production.js",
     "watch": "rm -rf ./dist/* && NODE_ENV='development' webpack --watch --config ./configs/webpack.development.js",
     "test": "jest --watch --no-cache",

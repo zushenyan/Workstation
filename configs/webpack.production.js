@@ -1,24 +1,7 @@
 const merge        = require("webpack-merge");
 const commonConfig = require("./webpack.common.js");
-const {
-  js,
-  font,
-  audio,
-  video,
-  image,
-  extractCss
-} = require("./webpack.loaders.js");
-const {
-  loaderOptions,
-  environmentFlags,
-  extractText,
-  htmlWebpack,
-  uglifyJs,
-  commonsChunkVendor,
-  commonsChunkManifest,
-  bundleAnalyzerPlugin,
-  offlinePlugin
-} = require("./webpack.plugins.js");
+const loaders      = require("./webpack.loaders.js");
+const plugins      = require("./webpack.plugins.js");
 
 module.exports = merge(
   commonConfig,
@@ -30,24 +13,24 @@ module.exports = merge(
     },
     module: {
       loaders: [
-        js,
-        font,
-        image,
-        audio,
-        video,
-        extractCss
+        loaders.js,
+        loaders.font,
+        loaders.image,
+        loaders.audio,
+        loaders.video,
+        loaders.extractCss
       ]
     },
     plugins: [
-      loaderOptions,
-      environmentFlags,
-      extractText,
-      htmlWebpack,
-      uglifyJs,
-      commonsChunkVendor,
-      commonsChunkManifest,
-      bundleAnalyzerPlugin,
-      offlinePlugin
+      plugins.loaderOptions,
+      plugins.environmentFlags,
+      plugins.extractText,
+      plugins.htmlWebpack,
+      plugins.uglifyJs,
+      plugins.commonsChunkVendor,
+      plugins.commonsChunkManifest,
+      plugins.bundleAnalyzerPlugin,
+      plugins.offlinePlugin
     ]
   }
 );
