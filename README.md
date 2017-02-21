@@ -36,7 +36,8 @@ Features
 - https://github.com/tcoopman/image-webpack-loader/issues/51
 
 # For Developer
-#### Support local/session storage
+- Support local/session storage
+- Support Web App Manifest
 
 #### Branches
 Other branches are legacy/experiments, please ignore them.
