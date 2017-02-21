@@ -61,7 +61,7 @@ exports.audio = {
 };
 
 exports.css = {
-  test:    /\.(scss|sass)$/,
+  test:    /\.(css|scss|sass)$/,
   loaders: [
     "style-loader",
     {
@@ -83,7 +83,7 @@ exports.css = {
 };
 
 exports.extractCss = {
-  test:    /\.(scss|sass)$/,
+  test:    /\.(css|scss|sass)$/,
   loader: ExtractTextPlugin.extract({
     fallback: "style-loader",
     use: [
